@@ -1,9 +1,143 @@
-function Login() {
-  return (
-    <div>
-      <h1>Login Page</h1>
-    </div>
-  )
-}
+import { useContext, useEffect, useState, type ChangeEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import type UsuarioLogin from "../../models/UsuarioLogin";
+import { AuthContext } from "../../contexts/AuthContext";
+import { ClipLoader } from "react-spinners";
 
-export default Login
+function Login() {
+
+  const navigate = useNavigate();
+
+  const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>({} as UsuarioLogin);
+
+  const { usuario, handleLogin, isLoading } = useContext(AuthContext);
+
+  // ESTADO DOS ERROS
+  const [erros, setErros] = useState({
+    usuario: "",
+    senha: "",
+  });
+  
+  useEffect(() => {
+    if (usuario.token !== '') {
+      navigate('/home');
+    }
+  }, [usuario]);
+
+  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+    setUsuarioLogin({
+      ...usuarioLogin,
+      [e.target.name]: e.target.value
+    })
+
+  }
+
+  function login(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    handleLogin(usuarioLogin);
+    navigate('/home');
+  }
+  console.log(JSON.stringify(usuario));
+
+  // --- VALIDADORES POR CAMPO ---
+  function validarCampo(nomeCampo: string, valor: string) {
+    const novosErros = { ...erros }
+
+    switch (nomeCampo) {
+      case "usuario":
+        if (!valor) {
+          novosErros.usuario = "O e-mail é obrigatório."
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor)) {
+          novosErros.usuario = "Informe um e-mail válido."
+        } else {
+          novosErros.usuario = ""
+        }
+        break
+      case "senha":
+        if (!valor) novosErros.senha = "A senha é obrigatória."
+        else if (valor.length < 8)
+          novosErros.senha = "A senha deve ter no mínimo 8 caracteres."
+        else novosErros.senha = ""
+        break
+
+
+        setErros(novosErros)
+    }
+  }
+  return (
+
+    <>
+
+      <div className=" grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+
+        {/* Coluna do formulário */}
+        <div className="flex justify-center items-center p-8">
+          <form
+            className="flex flex-col w-full max-w-sm mx-auto gap-4 bg-indigo-200 p-8 rounded-xl shadow-md"
+            onSubmit={login}
+          >
+            <h2 className="text-slate-900 text-5x1 font-bold text-center">Entrar</h2>
+
+            <div className="flex flex-col w-full ">
+              <label htmlFor="usuario">Usuário</label>
+              <input
+                type="text"
+                id="usuario"
+                name="usuario"
+                placeholder="Usuario"
+                className="border-2 border-slate-700 rounded p-2 bg-white"
+                value={usuarioLogin.usuario}
+                onChange={atualizarEstado}
+              />
+            </div>
+
+            <div className="flex flex-col w-full">
+              <label htmlFor="senha">Senha</label>
+              <input
+                type="password"
+                id="senha"
+                name="senha"
+                placeholder="Senha"
+                className="border-2 border-slate-700 rounded p-2 bg-white"
+                value={usuarioLogin.senha}
+                onChange={atualizarEstado}
+              />
+            </div>
+
+            <button
+              type='submit'
+              className='rounded text-white bg-indigo-400 hover:bg-indigo-900 
+                   w-1/2 py-2 flex justify-center text-center mx-auto'
+            >
+              {isLoading ?
+                <ClipLoader color="#ffffff" size={24} /> :
+                <span>Cadastrar</span>
+              }
+            </button>
+
+            <hr className="border-slate-800 w-full" />
+
+            <p className="text-center">
+              Ainda não tem uma conta?{' '}
+              <Link to="/cadastro" className="text-indigo-800 hover:underline">
+                Cadastre-se
+              </Link>
+            </p>
+          </form>
+        </div>
+
+        {/* Coluna da imagem */}
+        <div className="hidden lg:block w-full h-full overflow-hidden">
+          <img
+            src="https://ik.imagekit.io/u0isfvxls/Blog%20pessoal/foguete-espacial-moderno-com-design-plano_23-2147902183.avif?updatedAt=1763121545271"
+            className="w-full h-full object-cover object-center"
+            alt="Foguete"
+          />
+        </div>
+
+      </div>
+
+    </>
+  );
+}
+export default Login;
