@@ -51,7 +51,7 @@ function Navbar() {
           }`}
         >
           <ul className="flex flex-col gap-4 px-6 text-lg">
-            <li><Link to="/postagens" onClick={() => setMenuOpen(false)}>Postagens</Link></li>
+            <li><Link to='/postagens' className='hover:underline'>Postagens</Link></li>
             <li><Link to="/temas" onClick={() => setMenuOpen(false)}>Temas</Link></li>
             <li><Link to="/cadastrartema" onClick={() => setMenuOpen(false)}>Cadastrar tema</Link></li>
             <li><Link to="/perfil" onClick={() => setMenuOpen(false)}>Perfil</Link></li>

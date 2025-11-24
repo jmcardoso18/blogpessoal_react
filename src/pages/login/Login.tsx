@@ -35,35 +35,8 @@ function Login() {
   function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     handleLogin(usuarioLogin);
-    navigate('/home');
   }
-  console.log(JSON.stringify(usuario));
 
-  // --- VALIDADORES POR CAMPO ---
-  function validarCampo(nomeCampo: string, valor: string) {
-    const novosErros = { ...erros }
-
-    switch (nomeCampo) {
-      case "usuario":
-        if (!valor) {
-          novosErros.usuario = "O e-mail é obrigatório."
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor)) {
-          novosErros.usuario = "Informe um e-mail válido."
-        } else {
-          novosErros.usuario = ""
-        }
-        break
-      case "senha":
-        if (!valor) novosErros.senha = "A senha é obrigatória."
-        else if (valor.length < 8)
-          novosErros.senha = "A senha deve ter no mínimo 8 caracteres."
-        else novosErros.senha = ""
-        break
-
-
-        setErros(novosErros)
-    }
-  }
   return (
 
     <>
@@ -87,7 +60,7 @@ function Login() {
                 placeholder="Usuario"
                 className="border-2 border-slate-700 rounded p-2 bg-white"
                 value={usuarioLogin.usuario}
-                onChange={atualizarEstado}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
               />
             </div>
 
@@ -100,7 +73,7 @@ function Login() {
                 placeholder="Senha"
                 className="border-2 border-slate-700 rounded p-2 bg-white"
                 value={usuarioLogin.senha}
-                onChange={atualizarEstado}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
               />
             </div>
 
@@ -111,7 +84,7 @@ function Login() {
             >
               {isLoading ?
                 <ClipLoader color="#ffffff" size={24} /> :
-                <span>Cadastrar</span>
+                <span>Entrar</span>
               }
             </button>
 
