@@ -1,62 +1,41 @@
+
+
+import ListaPostagens from "../../components/postagem/listapostagem/ListaPostagens"
+import ModalPostagem from "../../components/postagem/modalpostagem/ModalPostagem"
+
 function Home() {
-  return (
-    // Container
-    <div
-        style={{
-            backgroundColor:"#312e81",
-            display: "flex",
-            justifyContent: "center"
-        }}
-    >      
-    {/* Grid que divide a rela em duas colunas  */}
-        <div
-            style={{
-                display:"grid",
-                gridTemplateColumns: "1fr 1fr",
-                color: "white",
-                width: "100%",
-                maxWidth: "1280px"
-            }}
-          >
-           {/* Coluna esquerda */}
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1rem",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    paddingTop: "1rem",
-                    paddingBottom: "1rem"
- 
-                }}>
-                <h2> Seja bem vinde!</h2>
-                <p> Expresse aqui seus pensamentos e opiniões</p>
-                {/* Link/ botão */}
-                <div>
-                    <div>Nova Postagem </div>
+    return (
+        <>
+            <div className="bg-linear-to-br from-indigo-500 via-sky-500 to-indigo-500 flex justify-center mt-10">
+                <div className='container grid grid-cols-2 text-white'>
+                    <div className="flex flex-col gap-4 items-center justify-center py-4">
+                        <h2 className='text-5xl font-bold'>
+                            Seja Bem Vinde!
+                        </h2>
+                        <p className='text-xl'>
+                            Expresse aqui seus pensamentos e opiniões
+                        </p>
+
+                        <div className="flex justify-around gap-4">
+                            
+                            <ModalPostagem />
+
+                        </div>
+                    </div>
+
+                    <div className="flex justify-center ">
+                        <img
+                            src="https://ik.imagekit.io/u0isfvxls/Blog%20pessoal/Jamila%20006%2037.jpg"
+                            alt="Imagem Página Home"
+                            className='w-2/3'
+                        />
+                    </div>
                 </div>
             </div>
- 
-            {/* Coluna direira */}
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center"
-                }}>
-                <img
-                    src="https://i.imgur.com/fyfri1v.png"
-                    alt="Imagem da Página Home"
-                    style={{
-                        width: "66%"
-                    }}
- 
-                />
-            </div>
-       
- 
-        </div>
-    </div>
-  )
+            
+            <ListaPostagens />
+        </>
+    )
 }
+
 export default Home
