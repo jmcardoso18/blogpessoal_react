@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import type Usuario from "../../models/Usuario";
 import { cadastrarUsuario } from "../../services/Service";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function Cadastro() {
 
@@ -95,7 +96,7 @@ function Cadastro() {
     const camposVazios = !usuario.nome || !usuario.usuario || !usuario.senha
 
     if (existeErro || camposVazios) {
-      alert("Existem erros no formulário. Corrija antes de continuar.")
+      ToastAlerta("Existem erros no formulário. Corrija antes de continuar.",'info')
       return
     }
 
@@ -103,10 +104,10 @@ function Cadastro() {
 
     try {
       await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuario)
-      alert("Usuário cadastrado com sucesso!")
+      ToastAlerta("Usuário cadastrado com sucesso!",'sucesso')
       navigate("/")
     } catch (error) {
-      alert("Erro ao cadastrar o usuário!")
+      ToastAlerta("Erro ao cadastrar o usuário!",'erro')
     }
 
     setIsLoading(false)

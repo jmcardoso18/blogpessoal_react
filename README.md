@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+# 📘 Blog Pessoal --- React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Badge](https://img.shields.io/badge/Status-Em%20Desenvolvimento-blue)
+![Badge](https://img.shields.io/badge/React-18.2.0-61dafb?logo=react)
+![Badge](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
+![Badge](https://img.shields.io/badge/Vite-5.0-646cff?logo=vite)
+![Badge](https://img.shields.io/badge/License-MIT-green)
 
-Currently, two official plugins are available:
+Um projeto de **Blog Pessoal** desenvolvido com **React**,
+**TypeScript** e **Vite**, utilizando boas práticas, componentes
+reutilizáveis e integração com API.\
+Este projeto faz parte da minha evolução como desenvolvedora Full Stack.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Funcionalidades
 
-## React Compiler
+✔️ Cadastro de usuário\
+✔️ Login com autenticação\
+✔️ Cadastro, listagem, edição e exclusão de temas\
+✔️ Cadastro, listagem, edição e exclusão de postagens\
+✔️ Validação de formulários\
+✔️ Consumo de API\
+✔️ Rotas protegidas com React Router\
+✔️ Interface responsiva e moderna
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🧱 Estrutura do Projeto
 
-## Expanding the ESLint configuration
+    src/
+    ├── assets/
+    ├── components/
+    ├── contexts/
+    ├── models/
+    ├── pages/
+    ├── services/
+    ├── App.tsx
+    └── main.tsx
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Como executar
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Clone o repositório
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+    git clone https://github.com/jmcardoso18/blogpessoal_react.git
+    cd blogpessoal_react
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Instale as dependências
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+    npm install
+ 
+### Inicie o servidor
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    npm run dev
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 👩‍💻 Desenvolvedora
+
+Jamila Moraes Cardoso
+
+## 📝 Licença
+
+MIT

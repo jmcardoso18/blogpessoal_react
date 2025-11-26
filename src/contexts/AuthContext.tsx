@@ -1,13 +1,15 @@
 
 import type UsuarioLogin from "../models/UsuarioLogin";
-import { createContext, useState } from "react";
+import { createContext, useRef, useState } from "react";
 import { login } from "../services/Service";
+import { ToastAlerta } from "../utils/ToastAlerta";
 
 interface AuthContextProps{
     usuario: UsuarioLogin
     handleLogout: () => void
     handleLogin: (usuarioLogin: UsuarioLogin) => void
     isLoading: boolean
+    isLogout: boolean
 }
 
 interface AuthProviderProps{
@@ -31,21 +33,26 @@ export function AuthProvider({children}: AuthProviderProps){
     //inicializa o estado de carregamento(loading)
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    //UseRefh - para saber se o logout foi forçado ou não
+    const isLogout=useRef(false)//Imune a renderização
+
+
     //função para logar o usuário
     async function handleLogin(usuarioLogin: UsuarioLogin){
         setIsLoading(true);
         try{
             //chamar o serviço de login
             await login(`/usuarios/logar`, usuarioLogin, setUsuario);
-            alert('Usuário logado com sucesso!');
-
+            ToastAlerta('Usuário logado com sucesso!', 'sucesso');
+            isLogout.current=false
         }catch(error){
-            alert('Erro ao logar o usuário! Verifique as credenciais.');
+            ToastAlerta('Erro ao logar o usuário! Verifique as credenciais.', 'erro');
         }
         setIsLoading(false);
     }
     
     function handleLogout(){
+        isLogout.current=true // Indica o logout intencional 
         setUsuario({
             id: 0,
             nome: '',
@@ -54,11 +61,11 @@ export function AuthProvider({children}: AuthProviderProps){
             foto: '',
             token: ''
         });
-        alert('Usuário deslogado com sucesso!');
+        ToastAlerta('Usuário deslogado com sucesso!', 'sucesso');
     }
 
     return(
-        <AuthContext.Provider value={{usuario, handleLogout, handleLogin, isLoading}}>
+        <AuthContext.Provider value={{usuario, handleLogout, handleLogin, isLoading, isLogout: isLogout.current}}>
             {children}
         </AuthContext.Provider>
     )

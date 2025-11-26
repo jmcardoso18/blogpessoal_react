@@ -41,12 +41,12 @@ function Login() {
 
     <>
 
-      <div className=" grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen overflow-hidden">
 
         {/* Coluna do formulário */}
         <div className="flex justify-center items-center p-8">
           <form
-            className="flex flex-col w-full max-w-sm mx-auto gap-4 bg-indigo-200 p-8 rounded-xl shadow-md"
+            className="flex flex-col w-full max-w-sm mx-auto gap-4 bg-sky-200 p-8 rounded-xl shadow-md"
             onSubmit={login}
           >
             <h2 className="text-slate-900 text-5x1 font-bold text-center">Entrar</h2>
@@ -79,7 +79,7 @@ function Login() {
 
             <button
               type='submit'
-              className='rounded text-white bg-indigo-400 hover:bg-indigo-900 
+              className='rounded text-white bg-sky-400 hover:bg-indigo-900 
                    w-1/2 py-2 flex justify-center text-center mx-auto'
             >
               {isLoading ?

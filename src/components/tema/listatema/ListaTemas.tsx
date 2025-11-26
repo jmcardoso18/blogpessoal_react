@@ -5,6 +5,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import type Tema from "../../../models/Tema";
 import { buscar } from "../../../services/Service";
 import CardTema from "../cardtema/CardTema";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function ListaTemas() {
 
@@ -14,15 +15,15 @@ function ListaTemas() {
 
     const [temas, setTemas] = useState<Tema[]>([])
 
-    const { usuario, handleLogout } = useContext(AuthContext)
+    const { usuario, handleLogout, isLogout } = useContext(AuthContext)
     const token = usuario.token
 
-    useEffect(() => {
-        if (token === '') {
-            alert('Você precisa estar logado!')
-            navigate('/')
+    if (token === "") {
+            if(!isLogout){
+            ToastAlerta("Você precisa estar logado!", "info")
+            }
+            navigate("/")
         }
-    }, [token])
 
     useEffect(() => {
         buscarTemas()    
@@ -51,7 +52,7 @@ function ListaTemas() {
             {isLoading && (
                 <div className="flex justify-center w-full my-8 mt-24">
                     <SyncLoader
-                        color="#312e81"
+                        color="#0284C7"
                         size={32}
                     />
                 </div>

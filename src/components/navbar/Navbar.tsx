@@ -1,22 +1,23 @@
-import { useContext, useState } from "react";
+import { useContext, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 function Navbar() {
   const navigate = useNavigate();
-  const { handleLogout } = useContext(AuthContext);
+  const {usuario, handleLogout } = useContext(AuthContext);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
   function logout() {
     handleLogout();
-    alert("O Usuário foi desconectado com sucesso!");
     navigate("/");
   }
 
-  return (
-    <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-indigo-900 text-white shadow-lg">
+  let component: ReactNode;
+
+  if (usuario.token !== "") {
+    component = (
+      <nav className="fixed top-0 left-0 w-full z-50 bg-linear-to-br from-indigo-500 via-sky-500 to-indigo-500 text-white shadow-lg">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
 
           {/* Logo */}
@@ -46,7 +47,7 @@ function Navbar() {
 
         {/* Menu Mobile */}
         <div 
-          className={`lg:hidden bg-indigo-800 transition-all duration-300 overflow-hidden ${
+          className={`lg:hidden bg-sky-800 transition-all duration-300 overflow-hidden ${
             menuOpen ? "max-h-96 py-4" : "max-h-0"
           }`}
         >
@@ -54,7 +55,7 @@ function Navbar() {
             <li><Link to='/postagens' className='hover:underline'>Postagens</Link></li>
             <li><Link to="/temas" onClick={() => setMenuOpen(false)}>Temas</Link></li>
             <li><Link to="/cadastrartema" onClick={() => setMenuOpen(false)}>Cadastrar tema</Link></li>
-            <li><Link to="/perfil" onClick={() => setMenuOpen(false)}>Perfil</Link></li>
+            <li><Link to='/perfil' className="hover:underline">Perfil</Link></li>
             <li>
               <button onClick={logout} className="text-left">
                 Sair
@@ -64,6 +65,12 @@ function Navbar() {
         </div>
       </nav>
 
+    )
+  } 
+
+  return (
+    <>
+      {component}
     </>
   );
 }

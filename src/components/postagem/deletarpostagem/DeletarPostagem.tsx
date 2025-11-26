@@ -4,6 +4,7 @@ import { AuthContext } from "../../../contexts/AuthContext"
 import type Postagem from "../../../models/Postagem"
 import { buscar, deletar } from "../../../services/Service"
 import { ClipLoader } from "react-spinners"
+import { ToastAlerta } from "../../../utils/ToastAlerta"
 
 function DeletarPostagem() {
 
@@ -33,7 +34,7 @@ function DeletarPostagem() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado')
+            ToastAlerta('Você precisa estar logado','info');
             navigate('/')
         }
     }, [token])
@@ -54,13 +55,13 @@ function DeletarPostagem() {
                 }
             })
 
-            alert('Postagem apagada com sucesso')
+            ToastAlerta('Postagem apagada com sucesso','sucesso');
 
         } catch (error: any) {
             if (error.toString().includes('401')) {
                 handleLogout()
             }else {
-                alert('Erro ao deletar a postagem.')
+                ToastAlerta('Erro ao deletar a postagem.', 'erro');
             }
         }
 
@@ -82,7 +83,7 @@ function DeletarPostagem() {
 
             <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
                 <header 
-                    className='py-2 px-6 bg-indigo-600 text-white font-bold text-2xl'>
+                    className='py-2 px-6 bg-sky-300 text-white font-bold text-2xl'>
                     Postagem
                 </header>
                 <div className="p-4">
@@ -96,13 +97,13 @@ function DeletarPostagem() {
                         Não
                     </button>
                     <button 
-                        className='w-full text-slate-100 bg-indigo-400 
-                        hover:bg-indigo-600 flex items-center justify-center'
+                        className='w-full text-slate-100  bg-sky-300
+                        hover:bg-sky-600 flex items-center justify-center'
                         onClick={deletarPostagem}>
 
                         { isLoading ? 
                             <ClipLoader 
-                                color="#ffffff" 
+                                color="#0284C7" 
                                 size={24}
                             /> : 
                             <span>Sim</span>
