@@ -1,14 +1,1 @@
 @import "tailwindcss";
-
-/* Habilitar gradiente radial */
-@theme {
-    --color-brand:#ff00ff;
-  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
-}
-
-/* Habilitar tokens de gradiente (Tailwind 4 não ativa sozinho) */
-@utility {
-  --tw-gradient-from: initial;
-  --tw-gradient-to: initial;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
